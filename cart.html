@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        /* Internal CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        #cart-items {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px;
+        }
+
+        #cart-total {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #checkout-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #checkout-btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div id="cart-items">
+        <!-- Cart items will be displayed here -->
+    </div>
+    <p id="cart-total">Cart Total: $0</p>
+    <button id="checkout-btn">Checkout</button>
+
+    <script>
+        // Sample cart data (empty for now)
+        const cartItems = [];
+
+        // Function to update cart items
+        function updateCart() {
+            const cartItemsContainer = document.getElementById("cart-items");
+            cartItemsContainer.innerHTML = ""; // Clear previous items
+
+            for (const item of cartItems) {
+                const itemElement = document.createElement("div");
+                itemElement.textContent = item.name + " - $" + item.price.toFixed(2);
+                cartItemsContainer.appendChild(itemElement);
+            }
+
+            // Calculate and update cart total
+            const cartTotalElement = document.getElementById("cart-total");
+            const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+            cartTotalElement.textContent = "Cart Total: $" + cartTotal.toFixed(2);
+        }
+
+        // Initial update
+        updateCart();
+
+        // Checkout button click event
+        const checkoutBtn = document.getElementById("checkout-btn");
+        checkoutBtn.addEventListener("click", () => {
+            alert("Thank you for your purchase!");
+            cartItems.length = 0; // Empty the cart
+            updateCart(); // Update cart display
+        });
+    </script>
+</body>
+</html>
